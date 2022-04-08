@@ -1,0 +1,207 @@
+{
+  "project_info": {
+    "project_number": "797043390702",
+    "firebase_url": "https://misc-applications.firebaseio.com",
+    "project_id": "misc-applications",
+    "storage_bucket": "misc-applications.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797043390702:android:62cade9adb1dd4c7bcdbff",
+        "android_client_info": {
+          "package_name": "com.google.firebase.ml.md"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsQthrGYV44kcDq4SPDZxicWMRoYVwGrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "797043390702-0qgsp4fpk2o6kt04uk86iaa8g3r09ss0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wilsofts.expressteller"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797043390702:android:a3508c8533e7600ebcdbff",
+        "android_client_info": {
+          "package_name": "com.wilsofts.creditshift"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsQthrGYV44kcDq4SPDZxicWMRoYVwGrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "797043390702-0qgsp4fpk2o6kt04uk86iaa8g3r09ss0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wilsofts.expressteller"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797043390702:android:939739290debd1c2bcdbff",
+        "android_client_info": {
+          "package_name": "com.wilsofts.expressteller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797043390702-nppk1dpuu37mc7fe36o9rnd79p107hth.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wilsofts.expressteller",
+            "certificate_hash": "e0a1d26d9d2d2d4759b9fafdd7edbcf808701399"
+          }
+        },
+        {
+          "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsQthrGYV44kcDq4SPDZxicWMRoYVwGrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "797043390702-0qgsp4fpk2o6kt04uk86iaa8g3r09ss0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wilsofts.expressteller"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797043390702:android:b2c1e36bfdf79420bcdbff",
+        "android_client_info": {
+          "package_name": "com.wilsofts.fxhaven"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsQthrGYV44kcDq4SPDZxicWMRoYVwGrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "797043390702-0qgsp4fpk2o6kt04uk86iaa8g3r09ss0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wilsofts.expressteller"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:797043390702:android:0f547c92124e4ce8bcdbff",
+        "android_client_info": {
+          "package_name": "com.wilsofts.myambulance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "797043390702-qqp2jprfoj51in7nngs27t4ae6tks8h1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wilsofts.myambulance",
+            "certificate_hash": "7a08f464ddc8eb099687502deb5a74ea5e2c9b00"
+          }
+        },
+        {
+          "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsQthrGYV44kcDq4SPDZxicWMRoYVwGrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "797043390702-vd25je6tbfupjpi30dihd2ampugr18hl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "797043390702-0qgsp4fpk2o6kt04uk86iaa8g3r09ss0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wilsofts.expressteller"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

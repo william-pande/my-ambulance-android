@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- See table below.  The external-files-path DOES NOT require external storage permissions. -->
+    <external-files-path
+        name="files"
+        path="/" />
+
+    <external-path
+        name="my_images"
+        path="Android/data/com.wilsofts.myambulance/files/Pictures" />
+</paths>

@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">My Ambulance</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_clients">Clients</string>
+
+    <string name="last_name">Driver Full Name</string>
+    <string name="mobile_contact">Mobile Contact</string>
+    <string name="email_address">Email Address</string>
+    <string name="close_window">Close Window</string>
+    <string name="save_user">Save Driver</string>
+    <string name="hospital_name">Hospital Name</string>
+    <string name="hospital_location">Hospital Location</string>
+    <string name="add_driver">Add Driver</string>
+    <string name="full_name">Full Name</string>
+    <string name="create_request">Create Request</string>
+    <string name="log_in">Login Account</string>
+    <string name="add_user">Add driver</string>
+    <string name="no_clients">There are no clients to view.\nSwipe down to load clients</string>
+    <string name="no_requests">Your requests list is empty.\Pull down to reload and your emergency requests shall be shown here</string>
+    <string name="not_logged_in">
+        Please login with your driver registered mobile contact or contact used to make any ambulance request to get your account related requests
+    </string>
+    <string name="request_details">Please describe the conditions of patient for better services</string>
+    <string name="maps_key">AIzaSyDGscBKlSoF5P7sSDQG77DxhvVxdGl651M</string>
+    <string name="proceed_log_in">Proceed Log In</string>
+    <string name="account_contact">Account mobile contact</string>
+    <string name="have_no_account">Have no account? Create Account</string>
+    <string name="have_account">Have Account? Log In</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="user_gender">Gender</string>
+    <string name="location_village">Village of Residence</string>
+    <string name="location_district">District of Residence</string>
+    <string name="create_account">Create Account</string>
+    <string name="conditions_of_patient">Conditions of patient</string>
+    <string name="request_ambulance">Request Ambulance</string>
+    <string name="menu_logout">Log Out</string>
+    <string name="reject_request">Reject Request</string>
+    <string name="accept_request">Accept Request</string>
+    <string name="vehicle_no">Vehicle Number</string>
+    <string name="request_info">Patient Conditions</string>
+    <string name="mark_as_complete">Mark As Complete</string>
+</resources>

@@ -1,14 +1,11 @@
 package com.wilsofts.myambulance.auth
 
-import android.content.BroadcastReceiver
-import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import android.widget.Toast
 import com.wilsofts.myambulance.MainActivity
 import com.wilsofts.myambulance.databinding.ActivityLogInBinding
 import com.wilsofts.myambulance.utils.AppPrefs
@@ -22,20 +19,6 @@ import org.json.JSONObject
 
 class LogInActivity : BaseActivity() {
     private lateinit var binding: ActivityLogInBinding
-    private val locationInitialised = object : BroadcastReceiver() {
-        override fun onReceive(p0: Context?, p1: Intent?) {
-            this@LogInActivity.proceedHome()
-        }
-    }
-
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        if (intent != null) {
-            if (intent.hasExtra("type") && intent.getStringExtra("type") == "new_request") {
-                AppPrefs.request_id = intent.getLongExtra("request_id", 0L)
-            }
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,14 +80,18 @@ class LogInActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        LocalBroadcastManager.getInstance(this).registerReceiver(this.locationInitialised, IntentFilter("location-initialised"))
         if (AppPrefs.bearer_token.isEmpty()) {
             this.binding.layoutLogin.visibility = View.VISIBLE
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(this.locationInitialised)
+
+    override fun locationInitialised(status: Boolean) {
+        if (status) {
+            this@LogInActivity.proceedHome()
+        } else {
+            Toast.makeText(this, "Location permissions denied, application is exiting", Toast.LENGTH_LONG).show()
+            this.finish()
+        }
     }
 }

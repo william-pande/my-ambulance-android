@@ -1,4 +1,4 @@
-package com.wilsofts.myambulance.ui.notifications
+package com.wilsofts.myambulance.ui.requests
 
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +9,7 @@ import com.wilsofts.myambulance.utils.network.ApiClient
 import com.wilsofts.myambulance.utils.network.ApiService
 import org.json.JSONObject
 
-class NotificationsViewModel : ViewModel() {
+class RequestsViewModel : ViewModel() {
     val loading = MutableLiveData<Boolean>()
     val requests = MutableLiveData<MutableList<Request>>()
 
@@ -20,13 +20,13 @@ class NotificationsViewModel : ViewModel() {
             apiResponse = object : ApiClient.ApiResponse {
                 override fun getResponse(response: JSONObject?, error: Throwable?) {
                     if (response !== null && response.getInt("code") == 1) {
-                        this@NotificationsViewModel.requests.postValue(Gson().fromJson(
+                        this@RequestsViewModel.requests.postValue(Gson().fromJson(
                             response.getJSONArray("requests").toString(), Array<Request>::class.java).toMutableList()
                         )
                     } else {
                         Utils.showToast(context = context, message = "Could not load requests, please retry")
                     }
-                    this@NotificationsViewModel.loading.postValue(false)
+                    this@RequestsViewModel.loading.postValue(false)
                 }
             }
         )
@@ -46,7 +46,7 @@ class NotificationsViewModel : ViewModel() {
 
     data class Patient(
         val contact: String, val full_name: String, val conditions: String, val user_gender: String,
-        val user_avatar: String, val date_of_birth: String,
+        val user_avatar: String, val date_of_birth: String, val client_id: Long
     )
 
     data class Driver(

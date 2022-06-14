@@ -49,6 +49,17 @@ class MyFirebase : FirebaseMessagingService() {
                             this.putExtra("request_id", JSONObject(response.getString("data")).getLong("request_id"))
                         }
                     )
+                } else if (response.getString("type") == "request_accepted") {
+                    Utils.showNotification(title = "Request Accepted", content = response.getString("body"), context = this)
+
+                } else if (response.getString("type") == "request_complete") {
+                    Utils.showNotification(title = "Request Complete", content = response.getString("body"), context = this)
+
+                } else if (response.getString("type") == "request_rejected") {
+                    Utils.showNotification(title = "Request Rejected", content = response.getString("body"), context = this)
+
+                } else if (response.getString("type") == "admin_status") {
+                    Utils.showNotification(title = "Admin Status", content = response.getString("body"), context = this)
                 }
             }
         }

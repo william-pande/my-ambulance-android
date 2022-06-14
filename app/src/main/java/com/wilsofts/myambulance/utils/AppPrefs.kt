@@ -12,11 +12,16 @@ object AppPrefs {
     fun logInUser(response: JSONObject) {
         bearer_token = response.getString("bearer_token")
         user_contact = response.getString("user_contact")
+        driver_status = response.getString("driver_status")
         full_name = response.getString("full_name")
         client_id = response.getLong("client_id")
         driver_id = response.getLong("driver_id")
         is_admin = if (response.has("is_admin")) response.getBoolean("is_admin") else false
     }
+
+    var driver_status: String
+        get() = Prefs.getString("driver_status", "Online")
+        set(value) = Prefs.putString("driver_status", value)
 
     var bearer_token: String
         get() = Prefs.getString("bearer_token", "")
@@ -46,11 +51,6 @@ object AppPrefs {
         get() = Prefs.getInt("notification_id", 0)
         set(value) = Prefs.putInt("notification_id", value)
 
-    //offline //online //idle //moving
-    var request_id: Long
-        get() = Prefs.getLong("request_id", 0L)
-        set(value) = Prefs.putLong("request_id", value)
-
     var fcm_token: String
         get() = Prefs.getString("fcm_token", "")
         set(value) = Prefs.putString("fcm_token", value)
@@ -66,10 +66,6 @@ object AppPrefs {
     }
 
     fun updateFCMToken() {
-        Utils.logE("FCM", fcm_token)
-        Utils.logE("Bearer", bearer_token)
-        Utils.logE("Updated", "Status = $fcm_updated")
-
         if (fcm_token.isNotEmpty() && !fcm_updated && bearer_token.isNotEmpty()) {
             ApiClient.getRetrofit()
                 .create(ApiService::class.java)

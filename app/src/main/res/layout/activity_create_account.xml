@@ -61,9 +61,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/mobile_contact"
                     android:layout_width="match_parent"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:inputType="none"
                     android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>

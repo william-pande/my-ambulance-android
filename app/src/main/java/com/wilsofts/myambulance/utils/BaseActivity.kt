@@ -2,35 +2,35 @@ package com.wilsofts.myambulance.utils
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
-import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
+import android.view.Window
+import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
+import com.wilsofts.myambulance.R
+import com.wilsofts.myambulance.utils.network.ApiClient
+import com.wilsofts.myambulance.utils.network.ApiService
+import org.json.JSONObject
 import java.io.IOException
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<Array<String>>
     private lateinit var locationLauncher: ActivityResultLauncher<IntentSenderRequest>
 
@@ -43,38 +43,16 @@ open class BaseActivity : AppCompatActivity() {
     // LocationCallback - Called when FusedLocationProviderClient has a new Location
     private lateinit var locationCallback: LocationCallback
 
-    private val gpsSwitchStateReceiver: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            if (LocationManager.PROVIDERS_CHANGED_ACTION == intent.action) {
-                // Make an action or refresh an already managed state.
-                val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-                if (isGpsEnabled || isNetworkEnabled) {
-                    Log.e("Location", "Location is enabled : isGpsEnabled = $isGpsEnabled isNetworkEnabled = $isNetworkEnabled")
-                } else {
-                    Log.e("Location", "Location disabled ")
-                }
-            }
-        }
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Register the permissions callback, which handles the user's response to the system permissions dialog.
         this.requestPermissionLauncher =
-            this.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-                var falseCount = 0
-                permissions.entries.forEach {
-                    if (it.value == false) {
-                        falseCount++
-                    }
-                }
-                if (falseCount > 0) {
-                    Toast.makeText(this, "Location permissions denied, application is exiting", Toast.LENGTH_LONG).show()
-                    this.finish()
+            this.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+                if (this.isLocationPermissionGranted()) {
+                    this.locationInitialised(false)
                 } else {
-                    LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("location-initialised"))
+                    this.startUpdates()
+                    this.locationInitialised(true)
                 }
             }
 
@@ -88,6 +66,13 @@ open class BaseActivity : AppCompatActivity() {
             }
         }
         this.initLocation()
+    }
+
+    fun updateStatusBarColor(){
+        val window: Window = window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.statusBarColor = ActivityCompat.getColor(this,
+            if (AppPrefs.driver_status == "Online") R.color.color_primary else R.color.color_red)
     }
 
     /*step 1, initialise location requests*/
@@ -109,11 +94,7 @@ open class BaseActivity : AppCompatActivity() {
         this.locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 super.onLocationResult(locationResult)
-                locationResult.lastLocation.let {
-                    LocalBroadcastManager.getInstance(this@BaseActivity).sendBroadcast(
-                        Intent("location-updates").putExtra("location", it)
-                    )
-                }
+                this@BaseActivity.updateLocation(location = locationResult.lastLocation)
             }
         }
     }
@@ -182,14 +163,15 @@ open class BaseActivity : AppCompatActivity() {
                 requestPermissions()
             }
         } else {
-            LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("location-initialised"))
+            this.startUpdates()
+            this.locationInitialised(true)
         }
     }
 
     /*step 4, get last location*/
     @SuppressLint("MissingPermission")
     fun getLastLocation(lastLocation: LastLocation) {
-        if (isLocationPermissionGranted()) {
+        if (this.isLocationPermissionGranted()) {
             LocationServices.getFusedLocationProviderClient(this).lastLocation
                 .addOnSuccessListener { location ->
                     location?.let {
@@ -206,8 +188,9 @@ open class BaseActivity : AppCompatActivity() {
     /*location updates*/
     @SuppressLint("MissingPermission")
     private fun startUpdates() {
-        if (isLocationPermissionGranted()) {
-            this.fusedLocationProviderClient.requestLocationUpdates(this.locationRequest, this.locationCallback, Looper.myLooper()!!)
+        if (this.isLocationPermissionGranted() && AppPrefs.driver_id > 0) {
+            this.fusedLocationProviderClient.requestLocationUpdates(this.locationRequest,
+                this.locationCallback, Looper.myLooper()!!)
         }
     }
 
@@ -222,20 +205,35 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    private fun updateLocation(location: Location) {
+        if (AppPrefs.driver_id > 0) {
+            ApiClient.createRequest(
+                call = ApiClient.getRetrofit().create(ApiService::class.java)
+                    .updateLocation(latitude = location.latitude, longitude = location.longitude),
+                apiResponse = object : ApiClient.ApiResponse {
+                    override fun getResponse(response: JSONObject?, error: Throwable?) {
+
+                    }
+                }
+            )
+        }
+    }
+
     /*overridden methods*/
     override fun onResume() {
         super.onResume()
         AppPrefs.updateFCMToken()
-        LocalBroadcastManager.getInstance(this).registerReceiver(this.gpsSwitchStateReceiver,
-            IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION)
-        )
         this.turnOnGPS()
+        this.startUpdates()
+        this.updateStatusBarColor()
     }
 
     override fun onPause() {
         super.onPause()
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(this.gpsSwitchStateReceiver)
+        this.stopUpdates()
     }
+
+    abstract fun locationInitialised(status: Boolean)
 
     companion object {
         fun getLocationDetails(latitude: Double, longitude: Double, context: Context): Utils.GeocodedAddress {

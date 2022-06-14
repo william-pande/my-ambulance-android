@@ -5,5 +5,11 @@
         android:id="@+id/nav_log_out"
         android:icon="@drawable/menu_logout"
         android:title="@string/menu_logout"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/switch_action_bar"
+        android:title="@string/driver_status"
+        app:actionLayout="@layout/layout_switch"
         app:showAsAction="always" />
 </menu>

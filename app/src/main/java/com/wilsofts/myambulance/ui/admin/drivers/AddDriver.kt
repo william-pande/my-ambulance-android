@@ -1,9 +1,10 @@
-package com.wilsofts.myambulance.ui.users
+package com.wilsofts.myambulance.ui.admin.drivers
 
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wilsofts.myambulance.databinding.LayoutAddDriverBinding
+import com.wilsofts.myambulance.ui.admin.clients.ClientsFragment
 import com.wilsofts.myambulance.utils.MyProgressDialog
 import com.wilsofts.myambulance.utils.Utils
 import com.wilsofts.myambulance.utils.network.ApiClient
@@ -12,13 +13,12 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
-class AddDriver(val activity: FragmentActivity, val client: UsersFragment.Client) {
+class AddDriver(val activity: FragmentActivity, val client: ClientsFragment.Client) {
     private val dialog = BottomSheetDialog(this.activity)
     private val binding = LayoutAddDriverBinding.inflate(this.activity.layoutInflater)
 
     init {
         dialog.setContentView(this.binding.root)
-
         setContent()
     }
 

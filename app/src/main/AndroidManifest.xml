@@ -27,6 +27,11 @@
         android:theme="@style/Theme.MyAmbulance">
 
         <activity
+            android:name=".ui.home.driver.NewRequestActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyAmbulance.NoActionBar" />
+
+        <activity
             android:name=".auth.CreateAccountActivity"
             android:exported="false" />
 
@@ -43,6 +48,11 @@
 
         <activity
             android:name=".MainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyAmbulance.NoActionBar" />
+
+        <activity
+            android:name=".ui.home.client.DriversActivity"
             android:exported="false"
             android:theme="@style/Theme.MyAmbulance.NoActionBar" />
 
@@ -68,4 +78,5 @@
                 android:resource="@xml/fileprovider" />
         </provider>
     </application>
+
 </manifest>

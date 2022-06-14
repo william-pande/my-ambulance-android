@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
@@ -16,10 +18,13 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.wilsofts.myambulance.R
 import java.io.File
 import java.io.IOException
@@ -41,6 +46,20 @@ object Utils {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
+    fun formatTime(time: String): Int {
+        val times = time.split(" ")
+        val length = times.size
+
+        var minutes = 0
+        if (length >= 2) {
+            minutes += times[0].toInt()
+        }
+        if (length >= 4) {
+            minutes += (times[2].toInt() * 60)
+        }
+        return minutes
+    }
+
     @SuppressLint("SimpleDateFormat")
     fun createImageFile(context: Context): File {
         val imageFileName = "JPEG_${SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())}_"
@@ -52,9 +71,19 @@ object Utils {
         Glide
             .with(context)
             .load(path)
+            .circleCrop()
             .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(true)
+            .skipMemoryCache(false)
             .into(imageView)
+    }
+
+    fun generateBitmapDescriptorFromRes(activity: FragmentActivity, resId: Int): BitmapDescriptor {
+        val drawable = ContextCompat.getDrawable(activity, resId)
+        drawable!!.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
     fun showNotification(title: String, content: String, intent: Intent? = null, context: Context) {

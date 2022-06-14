@@ -1,5 +1,6 @@
-package com.wilsofts.myambulance.ui.home
+package com.wilsofts.myambulance.ui.home.client
 
+import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.wilsofts.myambulance.databinding.LayoutCreateRequestBinding
@@ -52,8 +53,18 @@ class CreateRequest(private val activity: FragmentActivity, private val address:
                         dialog.dismiss()
                         if (response !== null) {
                             if (response.has("code") && response.getInt("code") == 1) {
-                                Utils.showToast(context = this@CreateRequest.activity, message = "Your request has been sent successfully")
-                                dialog.dismiss()
+                                val drivers = response.getJSONArray("drivers")
+                                if (drivers.length() == 0) {
+                                    Utils.showToast(activity, "No drivers are available to take on your request")
+                                } else {
+                                    this@CreateRequest.dialog.dismiss()
+                                    activity.startActivity(
+                                        Intent(activity, DriversActivity::class.java).apply {
+                                            this.putExtra("drivers", drivers.toString())
+                                            this.putExtra("request_id", response.getLong("request_id"))
+                                        }
+                                    )
+                                }
                             } else {
                                 Utils.showToast(context = this@CreateRequest.activity, message = "Could not save request, please retry")
                             }

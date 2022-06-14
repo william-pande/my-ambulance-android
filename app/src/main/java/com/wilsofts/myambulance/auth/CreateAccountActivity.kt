@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
@@ -74,6 +73,13 @@ class CreateAccountActivity : BaseActivity() {
         }
 
         this.eventsManager()
+    }
+
+    override fun locationInitialised(status: Boolean) {
+        if (!status) {
+            Toast.makeText(this, "Location permissions denied, application is exiting", Toast.LENGTH_LONG).show()
+            this.finish()
+        }
     }
 
     private fun eventsManager() {

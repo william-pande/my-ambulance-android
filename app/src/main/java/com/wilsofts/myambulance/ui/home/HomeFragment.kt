@@ -1,24 +1,21 @@
 package com.wilsofts.myambulance.ui.home
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorInt
-import androidx.annotation.DrawableRes
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment
@@ -26,6 +23,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import com.wilsofts.myambulance.MainActivity
 import com.wilsofts.myambulance.R
 import com.wilsofts.myambulance.databinding.FragmentHomeBinding
+import com.wilsofts.myambulance.ui.home.client.CreateRequest
 import com.wilsofts.myambulance.utils.BaseActivity
 import com.wilsofts.myambulance.utils.Utils
 
@@ -145,9 +143,5 @@ class HomeFragment : Fragment() {
 
     private fun updateDriverMarker(location: Location) {
 
-    }
-    override fun onResume() {
-        super.onResume()
-        (this.requireActivity() as MainActivity).binding.toolbar.toolbar.visibility = View.GONE
     }
 }

@@ -21,5 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="0dp"
         android:background="?android:attr/windowBackground"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_nav_menu" />
 </androidx.appcompat.widget.LinearLayoutCompat>

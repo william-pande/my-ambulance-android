@@ -20,15 +20,33 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/driver_name"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="6dp"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            tools:text="Mr John Smith" />
+            android:layout_marginBottom="6dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/driver_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                tools:text="Mr. John Doe" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/driver_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="14.34 KM" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/driver_contact"
@@ -36,38 +54,14 @@
             tools:text="+256788987777" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/district_village"
+            android:id="@+id/hospital_name"
             style="@style/list_drivers"
-            tools:text="Kampala - Kazo Zone" />
+            tools:text="Kampala International Hospital" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/gender_driver"
+            android:id="@+id/hospital_location"
             style="@style/list_drivers"
             android:layout_marginBottom="0dp"
-            tools:text="Male - Driver" />
+            tools:text="Kampala - Kazo Zone" />
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_driver_add"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@null"
-            android:scaleType="fitXY"
-            android:src="@drawable/driver_add"
-            android:tint="?attr/colorPrimaryDark" />
-
-        <androidx.appcompat.widget.SwitchCompat
-            android:id="@+id/btn_admin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
 </androidx.appcompat.widget.LinearLayoutCompat>

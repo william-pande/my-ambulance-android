@@ -22,7 +22,7 @@
             android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold"
-            tools:text="Pande William" />
+            tools:text="Klint Smith Roberts" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/client_contact"
@@ -87,7 +87,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                tools:text="Pande William" />
+                tools:text="John Andrews" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/hospital_name"
